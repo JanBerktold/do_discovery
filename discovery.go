@@ -2,6 +2,7 @@ package do
 
 import (
 	"github.com/digitalocean/godo"
+	"context"
 	"golang.org/x/oauth2"
 )
 
@@ -39,7 +40,7 @@ func (c *DiscoveryClient) ByTag(tag string, opts *FilterOptions) ([]godo.Droplet
 
 	opt := &godo.ListOptions{}
 	for {
-		droplets, resp, err := c.digitalClient.Droplets.ListByTag(tag, opt)
+		droplets, resp, err := c.digitalClient.Droplets.ListByTag(context.Background(), tag, opt)
 		if err != nil {
 			return result, err
 		}
